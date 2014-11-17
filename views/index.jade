@@ -2,10 +2,17 @@ extends layout
 
 block content
   h1= title
-  ul
-    li(ng-repeat=" todo in todos")
-      p {{todo.content}}
-      button(ng-click="removeTodo(todo)") Delete
   form(ng-submit="addTodo()")
-    input(type="text" placeholder="Add a new todo" ng-model="todoName")
+    input(type="text" placeholder="Add a new todo" ng-model="newTodo")
     button(type="submit") Add
+  ul
+    li(ng-repeat="todo in todos")
+      div(ng-hide="editing")
+        p(ng-click="editing = true")
+          {{todo.content}}
+
+      form(ng-show="editing", ng-submit="editing = false")
+        input(type="text", ng-model="todo.content", placeholder="todo.content")
+        button(type="submit") Save
+      button(ng-click="removeTodo(todo)") Delete
+  

@@ -14,10 +14,10 @@ app.controller('TodoCtrl', function($scope) {
     }
   ]
   $scope.addTodo = function() {
-    var todo = {
-      'content': $scope.todoName
+    var newTodo = {
+      'content': $scope.newTodo
     }
-    $scope.todos.push(todo);
+    $scope.todos.push(newTodo);
   }
   
   $scope.removeTodo = function(todo) {
