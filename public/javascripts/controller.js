@@ -18,6 +18,10 @@ app.controller('TodoCtrl', function($scope) {
       'content': $scope.todoName
     }
     $scope.todos.push(todo);
+  }
   
+  $scope.removeTodo = function(todo) {
+    var todoIndex = $scope.todos.indexOf(todo);
+    $scope.todos.splice(todoIndex, 1);
   }
 });

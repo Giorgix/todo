@@ -5,6 +5,7 @@ block content
   ul
     li(ng-repeat=" todo in todos")
       p {{todo.content}}
+      button(ng-click="removeTodo(todo)") Delete
   form(ng-submit="addTodo()")
     input(type="text" placeholder="Add a new todo" ng-model="todoName")
     button(type="submit") Add
