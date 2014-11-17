@@ -21,5 +21,10 @@ describe('Unit: TodoCtrl', function() {
     expect(scope.todos.length).toBe(4);
   });
 
+  it('should remove a todo from todos', function() {
+    scope.removeTodo(scope.todos[0]);
+    expect(scope.todos.length).toBe(2);
+  })
+
 })
 
