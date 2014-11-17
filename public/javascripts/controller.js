@@ -12,6 +12,12 @@ app.controller('TodoCtrl', function($scope) {
     {
       'content': 'third todo'
     }
-  
   ]
+  $scope.addTodo = function() {
+    var todo = {
+      'content': $scope.todoName
+    }
+    $scope.todos.push(todo);
+  
+  }
 });
