@@ -4,18 +4,22 @@ var app = angular.module('todoApp', []);
 app.controller('TodoCtrl', function($scope) {
   $scope.todos = [
     {
-      'content': 'first todo'
+      content: 'first todo',
+      completed: false
+      
     },
     {
-      'content': 'second todo'
+      content: 'second todo',
+      completed: false
     },
     {
-      'content': 'third todo'
+      content: 'third todo',
+      completed: false
     }
   ]
   $scope.addTodo = function() {
     var newTodo = {
-      'content': $scope.newTodo
+      content: $scope.newTodo.trim()
     }
     $scope.todos.push(newTodo);
   }
