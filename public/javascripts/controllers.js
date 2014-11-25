@@ -12,7 +12,7 @@ todoAppControllers.controller('TodoCtrl', function($scope) {
     },
     {
       content: 'second todo',
-      completed: false,
+      completed: true,
       priority: 'high'
     },
     {

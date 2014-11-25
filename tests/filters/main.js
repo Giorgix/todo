@@ -1,19 +1,31 @@
 describe('todoAppFilters', function() {
   beforeEach(module('todoApp'));
 
-  var filter, scope, ctrl;
+  var filter, $scope, ctrl;
 
-  beforeEach(inject(function($controller, $filter, $rootScope) {
-    scope = $rootScope.$new(); 
+  beforeEach(inject(function($controller, $filter) {
+    $scope = {}; 
     filter = $filter;
     ctrl = $controller('TodoCtrl', {
-      $scope: scope 
+      $scope: $scope 
     }) 
   }));
 
-  describe('status filter', function() {
+  describe('status filters', function() {
     it('should return all todos', function() {
-      expect(filter('status')(scope.todos, 'all').length).toBe(3);
+      var status = filter('status');
+      expect(status($scope.todos, 'all').length).toBe(3);
     });
+    
+    it('should return done todos', function() {
+      var status = filter('status');
+      expect(status($scope.todos, 'done').length).toBe(1);
+    });
+    
+    it('should return undone todos', function() {
+      var status = filter('status');
+      expect(status($scope.todos, 'todo').length).toBe(2);
+    });
+
   })
 });
