@@ -1,5 +1,5 @@
 describe('todoAppFilters', function() {
-  beforeEach(module('todoApp'));
+  beforeEach(module('todoAppFilters', 'todoAppControllers'));
 
   var filter, $scope, ctrl;
 
