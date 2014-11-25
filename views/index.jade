@@ -6,11 +6,15 @@ block content
     select(ng-model="priorityOpt", 
            ng-options="priorityOpt for priorityOpt in priorityOpts", 
            ng-init="priorityOpt = priorityOpt || priorityOpts[0]")
+    select(ng-model="statusOpt", 
+           ng-options="statusOpt for statusOpt in statusOpts", 
+           ng-init="statusOpt = statusOpt || statusOpts[0]")
+
     div       
       input(type="text" placeholder="Add a new todo" ng-model="newTodo")
       button(type="submit") Add
   ul
-    li(ng-repeat="todo in todos | priority:priorityOpt")
+    li(ng-repeat="todo in todos | priority:priorityOpt | status:statusOpt")
       div(ng-hide="editing")
         p(ng-click="editing = true")
           {{todo.content}}
@@ -20,5 +24,6 @@ block content
         select(ng-model="todo.priority",
                ng-options="priorityOpt for priorityOpt in priorityOpts")
         button(type="submit") Save
+      input(type="checkbox" ng-model="todo.completed")
       button(ng-click="removeTodo(todo)") Delete
   

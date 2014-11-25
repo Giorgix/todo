@@ -7,7 +7,7 @@ app.filter('priority', function() {
       return items;
     }
     filteredItems = [];
-    for(var i=0; i < items.length;i++) {
+    for(var i = 0; i < items.length; i++) {
       console.log(items[i]);
       if(items[i].priority == priorityOpt){
         filteredItems.push(items[i]); 
@@ -19,8 +19,31 @@ app.filter('priority', function() {
   }
 });
 
+app.filter('status', function() {
+  return function(items, statusOpt) {
+    if(statusOpt == 'all') {
+      return items;
+    }
+    filteredItems = [];
+    for (var i = 0;i < items.length; i++) {
+      if(statusOpt == 'todo') {
+        if(items[i].completed == false) {
+          filteredItems.push(items[i]);
+        }
+      } 
+      else {
+        if(items[i].completed == true) {
+          filteredItems.push(items[i]);
+          }
+        }
+      } 
+    return filteredItems; 
+    }
+  });
+
 app.controller('TodoCtrl', function($scope) {
   $scope.priorityOpts = ['all', 'high', 'normal', 'low'];
+  $scope.statusOpts = ['all', 'todo', 'done'];
   $scope.todos = [
     {
       content: 'first todo',
