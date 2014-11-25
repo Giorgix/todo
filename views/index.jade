@@ -3,16 +3,22 @@ extends layout
 block content
   h1= title
   form(ng-submit="addTodo()")
-    input(type="text" placeholder="Add a new todo" ng-model="newTodo")
-    button(type="submit") Add
+    select(ng-model="priorityOpt", 
+           ng-options="priorityOpt for priorityOpt in priorityOpts", 
+           ng-init="priorityOpt = priorityOpt || priorityOpts[0]")
+    div       
+      input(type="text" placeholder="Add a new todo" ng-model="newTodo")
+      button(type="submit") Add
   ul
-    li(ng-repeat="todo in todos")
+    li(ng-repeat="todo in todos | priority:priorityOpt")
       div(ng-hide="editing")
         p(ng-click="editing = true")
           {{todo.content}}
 
       form(ng-show="editing", ng-submit="editing = false")
         input(type="text", ng-model="todo.content", placeholder="todo.content")
+        select(ng-model="todo.priority",
+               ng-options="priorityOpt for priorityOpt in priorityOpts")
         button(type="submit") Save
       button(ng-click="removeTodo(todo)") Delete
   
