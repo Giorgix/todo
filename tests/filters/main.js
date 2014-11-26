@@ -28,4 +28,26 @@ describe('todoAppFilters', function() {
     });
 
   })
+  
+  describe('priority filters', function() {
+    it('should return all todos', function() {
+      var priority = filter('priority');
+      expect(priority($scope.todos, 'all').length).toBe(3);
+    });
+    
+    it('should return high priority todos', function() {
+      var priority = filter('priority');
+      expect(priority($scope.todos, 'high').length).toBe(1);
+    });
+    
+    it('should return normal priority todos', function() {
+      var priority = filter('priority');
+      expect(priority($scope.todos, 'normal').length).toBe(1);
+    });
+    it('should return low priority todos', function() {
+      var priority = filter('priority');
+      expect(priority($scope.todos, 'low').length).toBe(1);
+    });
+
+  });
 });
