@@ -14,25 +14,7 @@ todoAppControllers.controller('TodoCtrl', function($scope) {
     localStorage.setItem('priorityOpt', priorityOpt);
   }
 
-  /*$scope.todos = [
-    {
-      content: 'first todo',
-      completed: false,
-      priority: 'normal'
-      
-    },
-    {
-      content: 'second todo',
-      completed: true,
-      priority: 'high'
-    },
-    {
-      content: 'third todo',
-      completed: false,
-      priority: 'low'
-    }
-  ]*/
-  $scope.addTodo = function() {
+    $scope.addTodo = function() {
     var newTodo = {
       content: $scope.newTodo.trim(),
       completed : false,
