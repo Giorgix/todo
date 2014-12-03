@@ -8,7 +8,6 @@ todoAppFilters.filter('priority', function() {
     }
     filteredItems = [];
     for(var i = 0; i < items.length; i++) {
-      console.log(items[i]);
       if(items[i].priority == priorityOpt){
         filteredItems.push(items[i]); 
       } else {

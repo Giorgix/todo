@@ -5,16 +5,18 @@ block content
   form(ng-submit="addTodo()")
     select(ng-model="priorityOpt", 
            ng-options="priorityOpt for priorityOpt in priorityOpts", 
-           ng-init="priorityOpt = priorityOpt || priorityOpts[0]")
+           ng-init="priorityOpt = priorityOpt || priorityOpts[0]"
+           ng-change="priorityOptChange(priorityOpt)")
     select(ng-model="statusOpt", 
            ng-options="statusOpt for statusOpt in statusOpts", 
-           ng-init="statusOpt = statusOpt || statusOpts[0]")
+           ng-init="statusOpt = statusOpt || statusOpts[0]"
+           ng-change="statusOptChange(statusOpt)")
 
     div       
       input(type="text" placeholder="Add a new todo" ng-model="newTodo")
       button(type="submit") Add
   ul
-    li(ng-repeat="todo in todos | priority:priorityOpt | status:statusOpt")
+    li(ng-repeat="todo in todos | priority:priorityOpt | status:statusOpt track by $index")
       div(ng-hide="editing")
         p(ng-click="editing = true")
           {{todo.content}}
