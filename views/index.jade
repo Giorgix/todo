@@ -24,8 +24,9 @@ block content
       form(ng-show="editing", ng-submit="editing = false")
         input(type="text", ng-model="todo.content", placeholder="todo.content")
         select(ng-model="todo.priority",
-               ng-options="priorityOpt for priorityOpt in priorityOpts")
-        button(type="submit") Save
+               ng-options="priorityOpt for priorityOpt in priorityOpts",
+               ng-change="priorityOptChange(priorityOpt)")
+        button(type="submit" ng-click="saveEditedTodo(todo)") Save
       input(type="checkbox" ng-model="todo.completed")
       button(ng-click="removeTodo(todo)") Delete
   
