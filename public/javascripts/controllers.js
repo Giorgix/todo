@@ -4,15 +4,6 @@ todoAppControllers.controller('TodoCtrl', function($scope) {
   $scope.priorityOpts = ['all', 'high', 'normal', 'low'];
   $scope.statusOpts = ['all', 'todo', 'done'];
   $scope.todos = JSON.parse(localStorage.getItem('todos') || '[]');
-  $scope.statusOpt = localStorage.getItem('statusOpt') || 'all';
-  $scope.priorityOpt = localStorage.getItem('priorityOpt') || 'all';
-
-  $scope.statusOptChange = function(statusOpt) {
-    localStorage.setItem('statusOpt', statusOpt);
-  }
-  $scope.priorityOptChange = function(priorityOpt) {
-    localStorage.setItem('priorityOpt', priorityOpt);
-  }
 
     $scope.addTodo = function() {
     var newTodo = {

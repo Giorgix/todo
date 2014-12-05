@@ -5,12 +5,10 @@ block content
   form(ng-submit="addTodo()")
     select(ng-model="priorityOpt", 
            ng-options="priorityOpt for priorityOpt in priorityOpts", 
-           ng-init="priorityOpt = priorityOpt || priorityOpts[0]"
-           ng-change="priorityOptChange(priorityOpt)")
+           ng-init="priorityOpt = priorityOpt || priorityOpts[0]")
     select(ng-model="statusOpt", 
            ng-options="statusOpt for statusOpt in statusOpts", 
-           ng-init="statusOpt = statusOpt || statusOpts[0]"
-           ng-change="statusOptChange(statusOpt)")
+           ng-init="statusOpt = statusOpt || statusOpts[0]")
 
     div       
       input(type="text" placeholder="Add a new todo" ng-model="newTodo")
@@ -25,8 +23,8 @@ block content
         input(type="text", ng-model="todo.content", placeholder="todo.content")
         select(ng-model="todo.priority",
                ng-options="priorityOpt for priorityOpt in priorityOpts",
-               ng-change="priorityOptChange(priorityOpt)")
+               ng-change="saveEditedTodo(todo)")
         button(type="submit" ng-click="saveEditedTodo(todo)") Save
-      input(type="checkbox" ng-model="todo.completed")
+      input(type="checkbox" ng-model="todo.completed" ng-change="saveEditedTodo(todo)")
       button(ng-click="removeTodo(todo)") Delete
   
