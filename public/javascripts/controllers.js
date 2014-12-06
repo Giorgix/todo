@@ -9,7 +9,7 @@ todoAppControllers.controller('TodoCtrl', function($scope) {
     var newTodo = {
       content: $scope.newTodo.trim(),
       completed : false,
-      priority: $scope.priorityOpt
+      priority: $scope.priorityChoice
     };
     if(!newTodo.content) {
       return;
@@ -21,7 +21,7 @@ todoAppControllers.controller('TodoCtrl', function($scope) {
   
   $scope.saveEditedTodo = function(todo) {
     var todoIndex = $scope.todos.indexOf(todo);
-    console.log($scope.todos[todoIndex]);
+    //console.log($scope.todos[todoIndex]);
     $scope.todos[todoIndex] = todo;
     localStorage.setItem('todos', JSON.stringify($scope.todos));
   }
