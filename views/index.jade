@@ -3,13 +3,6 @@ extends layout
 block content
   h1= title
   form(ng-submit="addTodo()")
-    select(ng-model="priorityOpt", 
-           ng-options="priorityOpt for priorityOpt in priorityOpts", 
-           ng-init="priorityOpt = priorityOpt || priorityOpts[0]")
-    select(ng-model="statusOpt", 
-           ng-options="statusOpt for statusOpt in statusOpts", 
-           ng-init="statusOpt = statusOpt || statusOpts[0]")
-
     div       
       input(type="text" placeholder="Add a new todo" ng-model="newTodo")
       label High
@@ -19,6 +12,12 @@ block content
       label Low
       input(type="radio" ng-model="priorityChoice" value="low")
       button(type="submit") Add
+    select(ng-model="priorityOpt", 
+           ng-options="priorityOpt for priorityOpt in priorityOpts", 
+           ng-init="priorityOpt = priorityOpt || priorityOpts[0]")
+    select(ng-model="statusOpt", 
+           ng-options="statusOpt for statusOpt in statusOpts", 
+           ng-init="statusOpt = statusOpt || statusOpts[0]")
   ul
     li(ng-repeat="todo in todos | priority:priorityOpt | status:statusOpt track by $index")
       div(ng-hide="editing")
