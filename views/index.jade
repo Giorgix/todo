@@ -31,5 +31,5 @@ block content
                ng-change="saveEditedTodo(todo)")
         button(type="submit" ng-click="saveEditedTodo(todo)") Save
       input(type="checkbox" ng-model="todo.completed" ng-change="saveEditedTodo(todo)")
-      button(ng-click="removeTodo(todo)") Delete
+      button(ng-click="removeTodo(todo._id)") Delete
   

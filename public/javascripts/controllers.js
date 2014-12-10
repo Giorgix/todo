@@ -28,15 +28,27 @@ todoAppControllers.controller('TodoCtrl',['$scope', '$http', 'todosStorage', fun
   }
   
   $scope.saveEditedTodo = function(todo) {
-    var todoIndex = $scope.todos.indexOf(todo);
+    //var todoIndex = $scope.todos.indexOf(todo);
     //console.log($scope.todos[todoIndex]);
-    $scope.todos[todoIndex] = todo;
-    todosStorage.put($scope.todos);
+    //$scope.todos[todoIndex] = todo;
+    var editedTodo = {
+      content: todo.content,
+      completed : todo.completed,
+      priority: todo.priority
+    };
+
+    todosStorage.put(todo._id, editedTodo)
+                .success(function(data) {
+                  $scope.loading = false;
+                  $scope.todos = data;
+                });
   }
 
-  $scope.removeTodo = function(todo) {
-    var todoIndex = $scope.todos.indexOf(todo);
-    $scope.todos.splice(todoIndex, 1);
-    todosStorage.put($scope.todos);
+  $scope.removeTodo = function(todoId) {
+    todosStorage.delete(todoId)
+                .success(function(data) {
+                  $scope.loading = false;
+                  $scope.todos = data;
+                });
   }
 }]);
