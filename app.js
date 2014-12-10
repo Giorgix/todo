@@ -1,29 +1,38 @@
+// MODULES =============================================
 var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
+var logger = require('morgan');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var mongoose = require('mongoose');
+
+// CONFIGURATION =======================================
+
+// CONFIG FILES
+var db = require('./config/db');
+mongoose.connect(db.url);
+
+
+// ROUTES ==============================================
+var frontRoutes = require('./routes/index');
+var apiRoutes = require('./routes/api');
+
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views',(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json({type: 'application/vnd.api+json'}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', routes);
-app.use('/users', users);
+// Override with the X-HTTP-Method-Override header in the request. Simulate DELETE/PUT
+app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(express.static(__dirname + '/public'));
+
+app.use('/', frontRoutes);
+app.use('/api', apiRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

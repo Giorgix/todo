@@ -1,11 +1,13 @@
-angular.module('todoAppServices', []).factory('todosStorage', function(){
+angular.module('todoAppServices', []).factory('todosStorage',['$http', function($http){
   return {
     get: function() {
-      return JSON.parse(localStorage.getItem('todos') || '[]');
+      return $http.get('/api/todos');
+      //return JSON.parse(localStorage.getItem('todos') || '[]');
     },
     
-    put: function(todos) {
-      localStorage.setItem('todos', JSON.stringify(todos))
+    post: function(todo) {
+      return $http.post('/api/todos',todo);
+      
     }
   }
-});
+}]);

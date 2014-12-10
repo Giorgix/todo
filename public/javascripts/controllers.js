@@ -1,9 +1,13 @@
 var todoAppControllers = angular.module('todoAppControllers', []);
 
-todoAppControllers.controller('TodoCtrl', function($scope, todosStorage) {
+todoAppControllers.controller('TodoCtrl',['$scope', '$http', 'todosStorage', function($scope, $http, todosStorage) {
   $scope.priorityOpts = ['all', 'high', 'normal', 'low'];
   $scope.statusOpts = ['all', 'todo', 'done'];
-  $scope.todos = todosStorage.get();
+  todosStorage.get().success(function(data) {
+    $scope.todos = data;
+    console.log($scope.todos);
+    $scope.loading = false;
+  });
 
     $scope.addTodo = function() {
     var newTodo = {
@@ -14,9 +18,13 @@ todoAppControllers.controller('TodoCtrl', function($scope, todosStorage) {
     if(!newTodo.content) {
       return;
     }
-    $scope.todos.push(newTodo);
-    todosStorage.put($scope.todos);
-    $scope.newTodo = '';
+    //$scope.todos.push(newTodo);
+    todosStorage.post(newTodo)
+                .success(function(data) {
+                  $scope.loading = false;
+                  $scope.newTodo = '';
+                  $scope.todos = data;
+                });
   }
   
   $scope.saveEditedTodo = function(todo) {
@@ -31,4 +39,4 @@ todoAppControllers.controller('TodoCtrl', function($scope, todosStorage) {
     $scope.todos.splice(todoIndex, 1);
     todosStorage.put($scope.todos);
   }
-});
+}]);
