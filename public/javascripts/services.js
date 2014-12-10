@@ -8,8 +8,8 @@ angular.module('todoAppServices', []).factory('todosStorage',['$http', function(
       return $http.post('/api/todos',todo);
       
     },
-    put: function(todoId, todo) {
-      return $http.put('/api/todos/' + todoId, todo);
+    put: function(todo) {
+      return $http.put('/api/todos/' + todo._id, todo);
     
     },
     delete: function(todoId) {

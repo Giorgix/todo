@@ -5,11 +5,10 @@ todoAppControllers.controller('TodoCtrl',['$scope', '$http', 'todosStorage', fun
   $scope.statusOpts = ['all', 'todo', 'done'];
   todosStorage.get().success(function(data) {
     $scope.todos = data;
-    console.log($scope.todos);
     $scope.loading = false;
   });
 
-    $scope.addTodo = function() {
+  $scope.addTodo = function() {
     var newTodo = {
       content: $scope.newTodo.trim(),
       completed : false,
@@ -31,13 +30,7 @@ todoAppControllers.controller('TodoCtrl',['$scope', '$http', 'todosStorage', fun
     //var todoIndex = $scope.todos.indexOf(todo);
     //console.log($scope.todos[todoIndex]);
     //$scope.todos[todoIndex] = todo;
-    var editedTodo = {
-      content: todo.content,
-      completed : todo.completed,
-      priority: todo.priority
-    };
-
-    todosStorage.put(todo._id, editedTodo)
+    todosStorage.put(todo)
                 .success(function(data) {
                   $scope.loading = false;
                   $scope.todos = data;
