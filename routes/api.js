@@ -9,8 +9,9 @@ function getTodos(res) {
   Todos.find(function(err, todos) {
     if(err) {
       res.send(err);
-    }
+    } else {
     res.json(todos);
+    }
   });
 };
 

@@ -2,7 +2,8 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var Priority = new Schema({
+// TODO separete priorities and be able to create or remove them
+/*var Priority = new Schema({
   name: {
     type: String,
     unique: true,
@@ -11,6 +12,7 @@ var Priority = new Schema({
 });
 
 var PriorityModel = mongoose.model('Priority', Priority);
+*/
 
 var Todo = new Schema({
   content: {
@@ -24,7 +26,8 @@ var Todo = new Schema({
   },
   priority: {
     type: String,
-    required: true
+    required: true,
+    default: 'normal'
   }
 });
 

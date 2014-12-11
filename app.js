@@ -10,7 +10,8 @@ var mongoose = require('mongoose');
 
 // CONFIG FILES
 var db = require('./config/db');
-mongoose.connect(db.url);
+//mongoose.connect(db.url);
+mongoose.connect(db.urlTest);
 
 
 // ROUTES ==============================================
