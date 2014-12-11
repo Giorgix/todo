@@ -24,6 +24,8 @@ block content
         p(ng-click="editing = true")
           {{todo.content}}
 
+      //TODO make only 1 PUT request, don't save todo until SAVE is clicked
+      //TODO don't filter while editing todo
       form(ng-show="editing", ng-submit="editing = false")
         input(type="text", ng-model="todo.content", placeholder="todo.content")
         select(ng-model="todo.priority",
