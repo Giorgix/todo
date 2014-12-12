@@ -63,6 +63,7 @@ describe('API requests', function (){
                 priority: 'normal',
                 completed: false})
          .expect(200)
+         .expect('Content-Type', /json/)
          .end(function(err, res) {
            if (err) {
              return done(err);

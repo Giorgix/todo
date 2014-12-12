@@ -3,6 +3,7 @@ var todoAppControllers = angular.module('todoAppControllers', []);
 todoAppControllers.controller('TodoCtrl',['$scope', '$http', 'todosStorage', function($scope, $http, todosStorage) {
   $scope.priorityOpts = ['all', 'high', 'normal', 'low'];
   $scope.statusOpts = ['all', 'todo', 'done'];
+  $scope.todos = [];
   todosStorage.get()
               .success(function(data) {
                 $scope.todos = data;
