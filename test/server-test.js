@@ -60,7 +60,9 @@ describe("Basic dummy model DB operations", function() {
 });
 
 describe('API requests', function (){
-
+  
+  var itemId;
+  
   it('POST: should create a new element', function(done) {
     api.post('/todos')
          .send({content: 'test post', 
@@ -73,9 +75,26 @@ describe('API requests', function (){
              return done(err);
            }
            res.body.length.should.equal(1);
+           itemId = res.body[0]._id;
            done();
          });
       });
+  
+  it('PUT: should change the given element', function(done) {
+    api.put('/todos/' + itemId)
+       .send({content: 'test put',
+              priority: 'high',
+              completed: false})
+       .expect(200)
+       .expect('Content-Type', /json/)
+       .end(function(err, res) {
+         if(err) return done(err);
+         res.body[0].content.should.equal('test put');
+         res.body.length.should.equal(1);
+         done();
+       
+       });
+  });
 
   it('GET: should return elements as JSON', function(done) {
     api.get('/todos')
@@ -86,6 +105,17 @@ describe('API requests', function (){
          res.body.length.should.equal(1);
          done();
      });
+  });
+
+  it('DELETE: should delete given element', function(done) {
+    api.delete('/todos/' + itemId)
+       .expect(200)
+       .expect('Content-Type', /json/)
+       .end(function(err, res) {
+         if (err) return done(err);
+         res.body.length.should.equal(0);
+         done();
+       });
   });
 });
 
