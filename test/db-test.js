@@ -19,11 +19,15 @@ describe("Basic dummy model DB operations", function() {
   });
 
   it("can be saved", function(done) {
-    Dummy.create({content: 'test 1'},done);
+    Dummy.create({content: 'test 1',
+                  priority: 'normal'
+                 },done);
   });
   
   it("can be saved again", function(done) {
-    Dummy.create({content: 'test 2'},done);
+    Dummy.create({content: 'test 2',
+                  priority: 'normal'
+                 },done);
   });
 
   it("can be listed", function(done) {
