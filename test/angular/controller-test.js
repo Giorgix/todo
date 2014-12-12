@@ -1,29 +1,15 @@
 describe('Unit: TodoCtrl', function() {
-  beforeEach(module('todoApp'));
-
-  var ctrl, scope, storage, def;
-
-  beforeEach(inject(function($controller, $rootScope, $q) {
-    storage = {
-      get: function() {
-        def = $q.defer();
-        return def.promise;
-      }
-    };
-    spyOn(storage, 'get').andCallThrough();
-    scope = $rootScope.$new();
-    controller = $controller('ctrl', {
-      $scope: scope,
-      storage: storage
-    });
-  }));
+  
   describe('basic CRUD todos operations', function(){
-    var $scope, controller;
+    var $scope;
+    beforeEach(module('todoApp'));
 
-    beforeEach(function() {
-      $scope = {};
-      controller = $controller('TodoCtrl', { $scope: $scope });
-    });
+
+    beforeEach(inject(function($controller, $rootScope) {
+      $scope = $rootScope.$new();
+      $controller('TodoCtrl', { $scope: $scope });
+    }));
+
     it('should get todos on start', function() {
       expect($scope.todos.length).toBe(2);
     });
