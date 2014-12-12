@@ -28,9 +28,11 @@ router.route('/todos')
     priority: req.body.priority
   }, function(err, todo) {
      if(err) {
+       console.warn(err);
        res.send(err);
-     }
+     } else {
      getTodos(res);
+     }
   });
 })
 

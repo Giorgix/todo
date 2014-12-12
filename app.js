@@ -11,7 +11,16 @@ var mongoose = require('mongoose');
 // CONFIG FILES
 var db = require('./config/db');
 //mongoose.connect(db.url);
-mongoose.connect(db.urlTest);
+var dbURL;
+var env = process.env.NODE_ENV || 'development';
+if('development' == env) {
+  dbURL = db.urlTest; 
+};
+if('production' == env) {
+  dbURL = db.url; 
+};
+
+mongoose.connect(dbURL);
 
 
 // ROUTES ==============================================

@@ -1,6 +1,6 @@
 var dbURI = 'mongodb://test:testdb13@ds063140.mongolab.com:63140/test-db'
+//var dbURI = 'mongodb://localhost:27017/dummy-test'
   , should = require('chai').should()
-  , expect = require('chai').expect()
   , mongoose = require('mongoose')
   , supertest = require('supertest')
   , api = supertest('http://localhost:3000/api')
@@ -34,35 +34,11 @@ describe("Basic dummy model DB operations", function() {
     });
   });
   
-  describe('API requests', function (){
-
-    it('POST: should create a new element', function(done) {
-      api.post('/todos')
-         .send({content: 'test post', 
-                priority: 'normal',
-                completed: false})
-         .expect(200)
-         .end(function(err, res) {
-           if (err) return done(err);
-           res.body.length.should.equal(3);
-           done();
-         });
-      });
-
-    it('GET: should return elements as JSON', function(done) {
-      api.get('/todos')
-         .expect(200)
-         .expect('Content-Type', /json/)
-         .end(function(err, res) {
-           if (err) return done(err);
-           res.body.length.should.equal(3);
-           done();
-       });
-    });
-  });
-  /*it("can clear the DB on demand", function(done) {
-    new Dummy({content: 'test 7'}).save(function(err, model) {
+  it("can clear the DB on demand", function(done) {
+    Dummy.count(function(err, count){
       if(err) return done(err);
+      count.should.equal(2);
+    })
 
       clearDB(function(err){
         if(err) return done(err);
@@ -77,7 +53,34 @@ describe("Basic dummy model DB operations", function() {
         });
       });
     });
+});
+
+describe('API requests', function (){
+
+  it('POST: should create a new element', function(done) {
+    api.post('/todos')
+         .send({content: 'test post', 
+                priority: 'normal',
+                completed: false})
+         .expect(200)
+         .end(function(err, res) {
+           if (err) {
+             return done(err);
+           }
+           res.body.length.should.equal(1);
+           done();
+         });
+      });
+
+  it('GET: should return elements as JSON', function(done) {
+    api.get('/todos')
+       .expect(200)
+       .expect('Content-Type', /json/)
+       .end(function(err, res) {
+         if (err) return done(err);
+         res.body.length.should.equal(1);
+         done();
+     });
   });
-*/
 });
 
