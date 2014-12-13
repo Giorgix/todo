@@ -2,12 +2,14 @@ describe('Unit: TodoCtrl', function() {
   
   describe('basic CRUD todos operations', function(){
     var $scope;
-    beforeEach(module('todoApp'));
+    beforeEach(module('todoAppControllers'));
 
 
     beforeEach(inject(function($controller, $rootScope) {
       $scope = $rootScope.$new();
-      $controller('TodoCtrl', { $scope: $scope });
+      ctrl = $controller('TodoCtrl', { 
+        $scope: $scope,
+      });
     }));
 
     it('should get todos on start', function() {

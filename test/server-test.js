@@ -14,19 +14,16 @@ describe("Basic dummy model DB operations", function() {
     mongoose.connect(dbURI, done)
   });
 
-  before(function(done) {
+  beforeEach(function(done) {
     clearDB(done);
+    
   });
-
-  it("can be saved", function(done) {
+  beforeEach(function(done) {
     Dummy.create({content: 'test 1',
                   priority: 'normal'
-                 },done);
-  });
-  
-  it("can be saved again", function(done) {
+                 });
     Dummy.create({content: 'test 2',
-                  priority: 'normal'
+                  priority: 'high'
                  },done);
   });
 
@@ -50,8 +47,6 @@ describe("Basic dummy model DB operations", function() {
         Dummy.find({}, function(err, docs) {
           if(err) return done(err);
           
-          console.log(docs);
-
           docs.length.should.equal(0);
           done();
         });
@@ -60,8 +55,22 @@ describe("Basic dummy model DB operations", function() {
 });
 
 describe('API requests', function (){
-  
   var itemId;
+  beforeEach(function(done) {
+    clearDB(done);
+    
+  });
+  beforeEach(function(done) {
+    Dummy.create({content: 'test 1',
+                  priority: 'normal'}, function(err, dummy) {
+                      itemId = dummy._id; 
+                 });
+    
+    Dummy.create({content: 'test 2',
+                  priority: 'high'
+                 },done);
+  });
+
   
   it('POST: should create a new element', function(done) {
     api.post('/todos')
@@ -74,8 +83,7 @@ describe('API requests', function (){
            if (err) {
              return done(err);
            }
-           res.body.length.should.equal(1);
-           itemId = res.body[0]._id;
+           res.body.length.should.equal(3);
            done();
          });
       });
@@ -90,7 +98,7 @@ describe('API requests', function (){
        .end(function(err, res) {
          if(err) return done(err);
          res.body[0].content.should.equal('test put');
-         res.body.length.should.equal(1);
+         res.body.length.should.equal(2);
          done();
        
        });
@@ -102,7 +110,7 @@ describe('API requests', function (){
        .expect('Content-Type', /json/)
        .end(function(err, res) {
          if (err) return done(err);
-         res.body.length.should.equal(1);
+         res.body.length.should.equal(2);
          done();
      });
   });
@@ -113,7 +121,7 @@ describe('API requests', function (){
        .expect('Content-Type', /json/)
        .end(function(err, res) {
          if (err) return done(err);
-         res.body.length.should.equal(0);
+         res.body.length.should.equal(1);
          done();
        });
   });
