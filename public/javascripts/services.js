@@ -1,19 +1,19 @@
 angular.module('todoAppServices', []).factory('todosStorage',['$http', function($http){
-  return {
-    get: function() {
+  var service = {};
+    service.get = function() {
       return $http.get('/api/todos');
       //return JSON.parse(localStorage.getItem('todos') || '[]');
-    },
-    post: function(todo) {
+    }
+    service.post = function(todo) {
       return $http.post('/api/todos',todo);
       
     },
-    put: function(todo) {
+    service.put = function(todo) {
       return $http.put('/api/todos/' + todo._id, todo);
     
     },
-    delete: function(todoId) {
+    service.delete = function(todoId) {
       return $http.delete('/api/todos/' + todoId);
     }
-  }
+  return service;
 }]);
