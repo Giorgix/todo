@@ -1,32 +1,36 @@
 extends layout
 
 block content
-  div.container-fluid
+  div.container
     div.row
       div.col-md-12
-        h1= title
+        h1.text-center= title
         form(ng-submit="addTodo()")
-          input.form-control(type="text" placeholder="Add a new todo" ng-model="newTodo")
-          input(type="radio" ng-model="priorityChoice" value="high" id="prio_high" name="priority")
-          label(for="prio_high") High
-          input(type="radio" ng-model="priorityChoice" value="normal" id="prio_normal" name="priority")
-          label(for="prio_normal") Normal
-          input(type="radio" ng-model="priorityChoice" value="low" id="prio_low" name="priority")
-          label(for="prio_low") Low
-          button.btn.btn-primary.btn-lg.btn-block(type="submit") Add
-        label Priority
-        select.form-control(ng-model="priorityOpt", 
+          div.form-group.text-center.col-md-12
+            div.col-xs-12.col-md-9
+              input.form-control(type="text" placeholder="Add a new todo" ng-model="newTodo")
+            div.btn-group.col-md-3
+              label.btn.btn-success(ng-model="priorityChoice" btn-radio="'high'") High
+              label.btn.btn-success(ng-model="priorityChoice" btn-radio="'normal'") Normal
+              label.btn.btn-success(ng-model="priorityChoice" btn-radio="'low'") Low
+          div.form-group.text-center.col-md-12
+            div.col-sm-6.col-sm-offset-3
+              button.btn.btn-primary.btn-lg.btn-block(type="submit") Add
+        div.col-sm-6
+          label Priority
+          select.form-control(ng-model="priorityOpt", 
              ng-options="priorityOpt for priorityOpt in priorityOpts", 
              ng-init="priorityOpt = priorityOpt || priorityOpts[0]")
-        label Status
-        select.form-control(ng-model="statusOpt", 
+        div.col-sm-6
+          label Status
+          select.form-control(ng-model="statusOpt", 
              ng-options="statusOpt for statusOpt in statusOpts", 
              ng-init="statusOpt = statusOpt || statusOpts[0]")
-        ul.list-unstyled
+        ul.list-unstyled.col-md-12
           li(ng-repeat="todo in todos | priority:priorityOpt | status:statusOpt track by $index")
             div(ng-hide="editing")
               div.text-center
-                h2(ng-click="editing = true")
+                h3(class="{{todo.priority}}" ng-click="editing = true")
                   {{todo.content}}
                 input(type="checkbox" ng-model="todo.completed" ng-change="saveEditedTodo(todo)")
                 button.btn.btn-danger(ng-click="removeTodo(todo._id)") Delete

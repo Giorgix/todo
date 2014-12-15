@@ -1,2 +1,11 @@
 .nav, .pagination, .carousel, .panel-title a {
   cursor: pointer; }
+
+.high {
+  background-color: #FF5E5E; }
+
+.normal {
+  background-color: #FCF0B3; }
+
+.low {
+  background-color: #7999FC; }
