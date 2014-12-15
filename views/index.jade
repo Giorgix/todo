@@ -1,37 +1,42 @@
 extends layout
 
 block content
-  h1= title
-  form(ng-submit="addTodo()")
-    div       
-      input(type="text" placeholder="Add a new todo" ng-model="newTodo")
-      label High
-      input(type="radio" ng-model="priorityChoice" value="high")
-      label Normal
-      input(type="radio" ng-model="priorityChoice" value="normal")
-      label Low
-      input(type="radio" ng-model="priorityChoice" value="low")
-      button(type="submit") Add
-    select(ng-model="priorityOpt", 
-           ng-options="priorityOpt for priorityOpt in priorityOpts", 
-           ng-init="priorityOpt = priorityOpt || priorityOpts[0]")
-    select(ng-model="statusOpt", 
-           ng-options="statusOpt for statusOpt in statusOpts", 
-           ng-init="statusOpt = statusOpt || statusOpts[0]")
-  ul
-    li(ng-repeat="todo in todos | priority:priorityOpt | status:statusOpt track by $index")
-      div(ng-hide="editing")
-        p(ng-click="editing = true")
-          {{todo.content}}
+  div.container-fluid
+    div.row
+      div.col-md-12
+        h1= title
+        form(ng-submit="addTodo()")
+          input.form-control(type="text" placeholder="Add a new todo" ng-model="newTodo")
+          input(type="radio" ng-model="priorityChoice" value="high" id="prio_high" name="priority")
+          label(for="prio_high") High
+          input(type="radio" ng-model="priorityChoice" value="normal" id="prio_normal" name="priority")
+          label(for="prio_normal") Normal
+          input(type="radio" ng-model="priorityChoice" value="low" id="prio_low" name="priority")
+          label(for="prio_low") Low
+          button.btn.btn-primary.btn-lg.btn-block(type="submit") Add
+        label Priority
+        select.form-control(ng-model="priorityOpt", 
+             ng-options="priorityOpt for priorityOpt in priorityOpts", 
+             ng-init="priorityOpt = priorityOpt || priorityOpts[0]")
+        label Status
+        select.form-control(ng-model="statusOpt", 
+             ng-options="statusOpt for statusOpt in statusOpts", 
+             ng-init="statusOpt = statusOpt || statusOpts[0]")
+        ul.list-unstyled
+          li(ng-repeat="todo in todos | priority:priorityOpt | status:statusOpt track by $index")
+            div(ng-hide="editing")
+              div.text-center
+                h2(ng-click="editing = true")
+                  {{todo.content}}
+                input(type="checkbox" ng-model="todo.completed" ng-change="saveEditedTodo(todo)")
+                button.btn.btn-danger(ng-click="removeTodo(todo._id)") Delete
 
-      //TODO make only 1 PUT request, don't save todo until SAVE is clicked
-      //TODO don't filter while editing todo
-      form(ng-show="editing", ng-submit="editing = false")
-        input(type="text", ng-model="todo.content", placeholder="todo.content")
-        select(ng-model="todo.priority",
-               ng-options="priorityOpt for priorityOpt in priorityOpts",
-               ng-change="saveEditedTodo(todo)")
-        button(type="submit" ng-click="saveEditedTodo(todo)") Save
-      input(type="checkbox" ng-model="todo.completed" ng-change="saveEditedTodo(todo)")
-      button(ng-click="removeTodo(todo._id)") Delete
-  
+            //TODO make only 1 PUT request, don't save todo until SAVE is clicked
+            //TODO don't filter while editing todo
+            form(ng-show="editing", ng-submit="editing = false")
+              input.form-control(type="text", ng-model="todo.content", placeholder="todo.content")
+              select(ng-model="todo.priority",
+                     ng-options="priorityOpt for priorityOpt in priorityOpts",
+                     ng-change="saveEditedTodo(todo)")
+              button(type="submit" ng-click="saveEditedTodo(todo)") Save
+        

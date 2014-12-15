@@ -1,4 +1,4 @@
-var todoAppControllers = angular.module('todoAppControllers', []);
+var todoAppControllers = angular.module('todoAppControllers', ['ui.bootstrap']);
 
 todoAppControllers.controller('TodoCtrl',['$scope', '$http', 'todosStorage', function($scope, $http, todosStorage) {
   $scope.priorityOpts = ['all', 'high', 'normal', 'low'];
