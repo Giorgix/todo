@@ -33,11 +33,16 @@ block content
         ul.list-unstyled.col-md-12
           li(ng-repeat="todo in todos | priority:priorityOpt | status:statusOpt track by $index")
             div(ng-hide="editing")
-              div.text-center
-                h3(class="{{todo.priority}}" ng-click="editing = true")
-                  {{todo.content}}
-                input(type="checkbox" ng-model="todo.completed" ng-change="saveEditedTodo(todo)")
-                button.btn.btn-danger(ng-click="removeTodo(todo._id)") Delete
+              div.well.col-sm-12(class="{{todo.priority}}")
+                div.col-sm-8
+                  h3.text-center(ng-click="editing = true")
+                    {{todo.content}}
+                div.col-sm-4.text-right
+                  div.checkbox
+                    label
+                      input(type="checkbox" ng-model="todo.completed" ng-change="saveEditedTodo(todo)")
+                      | Mark as done
+                  button.btn.btn-danger(ng-click="removeTodo(todo._id)") Delete
 
             //TODO make only 1 PUT request, don't save todo until SAVE is clicked
             //TODO don't filter while editing todo
