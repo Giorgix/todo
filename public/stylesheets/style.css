@@ -1,6 +1,9 @@
 .nav, .pagination, .carousel, .panel-title a {
   cursor: pointer; }
 
+.container {
+  background-color: #F7F7F9; }
+
 .high {
   background-color: #FF5E5E; }
 

@@ -4,18 +4,22 @@ block content
   div.container
     div.row
       div.col-md-12
-        h1.text-center= title
-        form(ng-submit="addTodo()")
-          div.form-group.text-center.col-md-12
-            div.col-xs-12.col-md-9
-              input.form-control(type="text" placeholder="Add a new todo" ng-model="newTodo")
-            div.btn-group.col-md-3
-              label.btn.btn-success(ng-model="priorityChoice" btn-radio="'high'") High
-              label.btn.btn-success(ng-model="priorityChoice" btn-radio="'normal'") Normal
-              label.btn.btn-success(ng-model="priorityChoice" btn-radio="'low'") Low
-          div.form-group.text-center.col-md-12
-            div.col-sm-6.col-sm-offset-3
-              button.btn.btn-primary.btn-lg.btn-block(type="submit") Add
+        h1.text-uppercase.text-center todo
+          small app
+        form.panel.panel-default(ng-submit="addTodo()")
+          div.panel-body
+            div.form-group.text-center.col-md-12
+              div.col-xs-12.col-md-9
+                input.form-control(type="text" placeholder="Add a new todo" ng-model="newTodo")
+              div.btn-group.col-md-3
+                label.btn.btn-default(ng-model="priorityChoice" btn-radio="'high'") High
+                label.btn.btn-default(ng-model="priorityChoice" btn-radio="'normal'") Normal
+                label.btn.btn-default(ng-model="priorityChoice" btn-radio="'low'") Low
+            div.form-group.text-center.col-md-12
+              div.col-sm-6.col-sm-offset-3
+                button.btn.btn-primary.btn-lg.btn-block(type="submit") Add
+        div
+          h2.text-center Todo List
         div.col-sm-6
           label Priority
           select.form-control(ng-model="priorityOpt", 
