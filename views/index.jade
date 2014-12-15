@@ -38,9 +38,13 @@ block content
             //TODO make only 1 PUT request, don't save todo until SAVE is clicked
             //TODO don't filter while editing todo
             form(ng-show="editing", ng-submit="editing = false")
-              input.form-control(type="text", ng-model="todo.content", placeholder="todo.content")
-              select(ng-model="todo.priority",
+              div.col-md-8
+                input.form-control(type="text", ng-model="todo.content", placeholder="todo.content")
+              div.col-md-4
+                select.form-control(ng-model="todo.priority",
                      ng-options="priorityOpt for priorityOpt in priorityOpts",
                      ng-change="saveEditedTodo(todo)")
-              button(type="submit" ng-click="saveEditedTodo(todo)") Save
+              div.col-md-12
+                div.col-md-6.col-md-offset-3  
+                  button.btn.btn-success.btn-block(type="submit" ng-click="saveEditedTodo(todo)") Save
         
