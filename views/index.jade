@@ -42,7 +42,7 @@ block content
                     label
                       input(type="checkbox" ng-model="todo.completed" ng-change="saveEditedTodo(todo)")
                       | Mark as done
-                  button.btn.btn-danger(ng-click="removeTodo(todo._id)") Delete
+                  button.btn.btn-danger.btn--delete(ng-click="removeTodo(todo._id)") Delete
 
             //TODO make only 1 PUT request, don't save todo until SAVE is clicked
             //TODO don't filter while editing todo
