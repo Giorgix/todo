@@ -17,7 +17,7 @@ block content
                 label.btn.btn-default(ng-model="priorityChoice" btn-radio="'low'") Low
             div.form-group.text-center.col-md-12
               div.col-sm-6.col-sm-offset-3
-                button.btn.btn-primary.btn-lg.btn-block(type="submit") Add
+                button.btn.btn-primary.btn-lg.btn-block(id="addButton" type="submit") Add
         div
           h2.text-center Todo List
         div.col-sm-6
@@ -30,7 +30,7 @@ block content
           select.form-control(ng-model="statusOpt", 
              ng-options="statusOpt for statusOpt in statusOpts", 
              ng-init="statusOpt = statusOpt || statusOpts[0]")
-        ul.list-unstyled.col-md-12
+        ul#todoList.list-unstyled.col-md-12
           li(ng-repeat="todo in todos | priority:priorityOpt | status:statusOpt track by $index")
             div(ng-hide="editing")
               div.well.col-sm-12(class="{{todo.priority}}")
